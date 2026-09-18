@@ -1,0 +1,29 @@
+[project]
+name = "protein-function-solution"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "cupy-cuda12x==13.6.0",
+    "duckdb>=1.5.5",
+    "fair-esm>=2.0.0",
+    "kagglehub>=1.0.2",
+    "numba>=0.67.0",
+    "numpy==2.3.5",
+    "pandas>=3.0.5",
+    "py-boost>=0.5.2",
+    "pyarrow>=25.0.1",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.17.1",
+    "sentencepiece>=0.2.2",
+    "torch==2.14.0",
+    "transformers>=5.17.0",
+    "xgboost-cu12==3.4.1",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
