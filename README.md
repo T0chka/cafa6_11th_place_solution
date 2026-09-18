@@ -1,10 +1,7 @@
 # CAFA6 protein function prediction solution
 
-This repository contains the 11th-place solution for the Kaggle CAFA6 Protein Function Prediction competition. The pipeline combines six complementary protein-function predictors with an XGBoost learning-to-rank ensemble and ontology-aware postprocessing.
+This repository contains the 11th-place solution for the Kaggle [CAFA6 Protein Function Prediction](https://www.kaggle.com/competitions/cafa-6-protein-function-prediction) competition. The original competition write-up is available [here](https://www.kaggle.com/competitions/cafa-6-protein-function-prediction/writeups/11th-place-solution). The pipeline combines six complementary protein-function predictors with an XGBoost learning-to-rank ensemble and ontology-aware postprocessing.
 
-The final submission is written to: `artifacts/final/submission.tsv`
-
-Generated data, embeddings, model files, caches, and evaluation outputs live under `artifacts/` and are excluded from Git.
 
 ## Solution overview
 
@@ -29,13 +26,13 @@ Python 3.12 is required. Dependencies are managed with `uv`.
 uv sync
 ```
 
-The configured environment pins the GPU-sensitive packages used for this solution, including CuPy, NumPy, PyTorch, PyBoost, and XGBoost. Check NVIDIA
-driver/CUDA compatibility before installing the configured PyTorch wheel on a new GPU machine.
+The configured environment pins the GPU-sensitive packages used for this solution, including CuPy, NumPy, PyTorch, PyBoost, and XGBoost. Check NVIDIA driver/CUDA compatibility before installing the configured PyTorch wheel on a new GPU machine.
 
-Competition inputs are downloaded through `kagglehub`. The UniProt-GOA inputs used by data preparation are configured in `config.py` and cached under
-`artifacts/cache/uniprot/`.
+Competition inputs are downloaded through `kagglehub`. The UniProt-GOA inputs used by data preparation are configured in `config.py` and cached under `artifacts/cache/uniprot/`.
 
 BLAST requires `makeblastdb` and `blastp` on `PATH`. Existing BLAST hit Parquet files are reused automatically.
+
+Generated data, embeddings, model files, caches, and evaluation outputs live under `artifacts/` and are excluded from Git.
 
 ## Pipeline
 
@@ -58,7 +55,7 @@ uv run python -m scripts.predict
 
 The first two commands prepare the training/test indices, ontology-aligned annotation structures, UniProt-derived features, and protein embeddings. Each
 `build_*` command trains or constructs one base component and writes its OOF and test predictions. `train_ltr` fits the final ranker. `predict` creates only the
-final TSV submission.
+final TSV submission written to: `artifacts/final/submission.tsv`
 
 
 ## Evaluation
